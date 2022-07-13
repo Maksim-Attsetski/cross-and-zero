@@ -15,22 +15,18 @@ const App: FC = () => {
         ]
 
         const [game, setGame] = useState({
-            step: 0, isGameEnd: false,
+            step: 0, isGameEnd: false, isDraw: false,
         })
 
         const isZero = useMemo(() => game.step % 2 === 0 ? 'x' : 'o', [game.step])
 
-        const handleCellClick = ({target}: any) => {
-            if (target.innerHTML === 'x' || target.innerHTML === 'o' || game.isGameEnd) return
+        const handleCellClick = ({target}: any = null) => {
+            console.log(target)
+            if (game.isGameEnd || target?.innerHTML === 'x' || target?.innerHTML === 'o') return
 
             const cellsEl = document.querySelectorAll('.game-board__cell')
             target.innerHTML = isZero
             setGame({...game, step: game.step + 1})
-
-            // if (game.step === 8) {
-            //     alert('ничья')
-            //     return
-            // }
 
             winPos.forEach((item, i) => {
                 const zeroWin = cellsEl[winPos[i][0]].innerHTML === 'o' &&
@@ -42,24 +38,31 @@ const App: FC = () => {
                     cellsEl[winPos[i][2]].innerHTML === 'x'
 
                 if (crossWin) {
-                    alert('крестики победили')
-                    setGame({...game, isGameEnd: true})
+                    setAlert("win", "крестики")
                 } else if (zeroWin) {
-                    alert('нолики победили')
-                    setGame({...game, isGameEnd: true})
-                } else if (!crossWin && !zeroWin && game.step === 8) {
-                    alert('ничья')
-                    setGame({...game, isGameEnd: true})
-                    initCells()
+                    setAlert("win", "нолики")
+                } else if (game.step === 8 && !crossWin && !zeroWin) {
+                    setAlert("draw", null)
+                    handleCellClick({target: null})
                 }
             })
+        }
+
+        const setAlert = (state: 'win' | 'draw', winner: 'крестики' | 'нолики' | null) => {
+            if (state === 'win' && winner) {
+                setGame({...game, isGameEnd: true})
+                alert(`${winner} победили`)
+            } else if (state === 'draw') {
+                setGame({...game, isGameEnd: true, isDraw: true})
+                alert('ничья')
+            }
         }
 
         const initCells = (): void => {
             const cellsEl = document.querySelectorAll('.game-board__cell')
 
             cellsEl.forEach((item) => item.innerHTML = '')
-            setGame({step: 0, isGameEnd: false})
+            setGame({step: 0, isGameEnd: false, isDraw: false})
         }
 
         useEffect(() => initCells(), [])
@@ -70,7 +73,7 @@ const App: FC = () => {
                     <div className='game-step'>Ходят – {isZero}</div>
                     <div className='game-board'>{
                         [0, 1, 2, 3, 4, 5, 6, 7, 8].map((item) =>
-                            <div onClick={handleCellClick} className='game-board__cell'/>
+                            <div onClick={handleCellClick} key={item} className='game-board__cell'/>
                         )
                     }</div>
                     <hr className='game__divider'/>
