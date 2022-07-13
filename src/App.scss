@@ -34,6 +34,8 @@
     flex-wrap: wrap;
     width: clamp(210px, 60vmin, 600px);
     height: clamp(210px, 60vmin, 600px);
+    border-radius: 7px;
+    overflow: hidden;
     &__cell {
       width: clamp(70px, 20vmin, 200px);
       height: clamp(70px, 20vmin, 200px);
