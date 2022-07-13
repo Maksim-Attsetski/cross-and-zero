@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/cross-and-zero/static/css/main.66e42421.css",
-    "main.js": "/cross-and-zero/static/js/main.5cedbdb7.js",
+    "main.css": "/cross-and-zero/static/css/main.135bae67.css",
+    "main.js": "/cross-and-zero/static/js/main.cfdb2495.js",
     "index.html": "/cross-and-zero/index.html",
-    "main.66e42421.css.map": "/cross-and-zero/static/css/main.66e42421.css.map",
-    "main.5cedbdb7.js.map": "/cross-and-zero/static/js/main.5cedbdb7.js.map"
+    "main.135bae67.css.map": "/cross-and-zero/static/css/main.135bae67.css.map",
+    "main.cfdb2495.js.map": "/cross-and-zero/static/js/main.cfdb2495.js.map"
   },
   "entrypoints": [
-    "static/css/main.66e42421.css",
-    "static/js/main.5cedbdb7.js"
+    "static/css/main.135bae67.css",
+    "static/js/main.cfdb2495.js"
   ]
 }
